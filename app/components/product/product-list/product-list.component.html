@@ -1,0 +1,59 @@
+<div>
+  <label for="category">Category:</label>
+  <select id="category" [(ngModel)]="selectedCategory">
+    <option value="Electronics">Electronics</option>
+    <option value="Apparel">Apparel</option>
+    <option value="Footwear">Footwear</option>
+  </select>
+
+  <label for="subcategory">Subcategory:</label>
+  <select id="subcategory" [(ngModel)]="selectedSubcategory">
+    <!-- Populate subcategories based on selected category -->
+    <ng-container *ngFor="let subcategory of subcategories[selectedCategory]">
+      <option [value]="subcategory">{{ subcategory }}</option>
+    </ng-container>
+  </select>
+
+  <button (click)="filterProductsByCategory(selectedCategory, selectedSubcategory)">Filter</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Code</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Product Description</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.code }}</td>
+      <td>{{ product.name }}</td>
+      <td [ngClass]="{'red-background': product.quantity < 10, 'orange-background': product.quantity >= 10 && product.quantity <= 100, 'green-background': product.quantity > 100}">
+        {{ product.quantity }}
+      </td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td><img [src]="product.image" alt="Product Image" width="50"></td>
+    </tr>
+  </tbody>
+</table>
+
+<style>
+  .red-background {
+    background-color: red;
+    color: white;
+  }
+
+  .orange-background {
+    background-color: orange;
+  }
+
+  .green-background {
+    background-color: green;
+    color: white;
+  }
+</style>

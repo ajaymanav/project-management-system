@@ -1,0 +1,10 @@
+<form (ngSubmit)="saveProduct()">
+    <div class="form-group">
+      <label for="code">Product Code:</label>
+      <input type="text" id="code" [(ngModel)]="product.code" name="code" required>
+    </div>
+    <!-- Add other form fields for name, quantity, price, description, category, and subcategory -->
+    <button type="submit">Save</button>
+    <button routerLink="/products">Cancel</button>
+  </form>
+  
